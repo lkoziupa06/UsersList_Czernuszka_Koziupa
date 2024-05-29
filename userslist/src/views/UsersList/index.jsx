@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Card from "../../components/Card"
  
 const UsersList = () => {
     const urlApi = "https://randomuser.me/api/?results=5"
@@ -7,14 +8,19 @@ const UsersList = () => {
         fetch(urlApi)
         .then(response => response.json())
         .then(data => setUsers(data.results))
+        .then(data => console.log())
         .catch(error => console.log('Hubo un error ' + error))
     }, [])
- 
+
     return(
-    <div>
-        <h1>Listado: </h1>
-        <ul> {users.map((user, index) => <li key={index}>{user.name.first}</li>)}</ul>
-    </div>
+        <>
+            <div className = "container-narrow mx-5">
+                <h1>Usuarios</h1>
+                {users.map((user, index) => (
+                    <Card key={index} nombre={user.name} link="" imagen = ""/>
+                ))}
+            </div>
+        </>
     )
 }
 
