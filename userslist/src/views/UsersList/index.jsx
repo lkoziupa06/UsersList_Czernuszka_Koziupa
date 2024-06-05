@@ -14,12 +14,17 @@ const UsersList = () => {
 
     return(
         <>
-            <div className = "container-narrow mx-5">
-                <h1>Usuarios</h1>
-                {users.map((user, index) => (
-                    <Card key={index} nombre={user.name} link="" imagen = ""/>
-                ))}
-            </div>
+            <div className="container-narrow mx-5">
+            <h1>Usuarios</h1>
+            {users.map((user, index) => (
+                <Card 
+                    key={index} 
+                    nombre={`${user.name.first} ${user.name.last}`} 
+                    link="" 
+                    imagen={user.picture.thumbnail} 
+                />
+            ))}
+        </div>
         </>
     )
 }
