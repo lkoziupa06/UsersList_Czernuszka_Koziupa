@@ -14,17 +14,22 @@ const UsersList = () => {
 
     return(
         <>
-            <div className="container-narrow mx-5">
-            <h1>Usuarios</h1>
-            {users.map((user, index) => (
-                <Card 
-                    key={index} 
-                    nombre={`${user.name.first} ${user.name.last}`} 
-                    link="" 
-                    imagen={user.picture.thumbnail} 
-                />
-            ))}
-        </div>
+            <div class="container-narrow my-5 mx-5 pt-4 px-3 px-lg-4">
+                <div class="text-center mb-5">
+                    <h1>Usuarios</h1>
+                </div>
+                <div className="row justify-content-center">
+                    {users.map((user, index) => (
+                        <div className="col-md-2" key={index}>
+                            <Card 
+                                nombre={`${user.name.first} ${user.name.last}`} 
+                                link="" 
+                                imagen={user.picture.large} 
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
         </>
     )
 }
