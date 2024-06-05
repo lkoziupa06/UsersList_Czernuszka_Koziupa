@@ -12,9 +12,11 @@ const UsersList = () => {
         .catch(error => console.log('Hubo un error ' + error))
     }, [])
 
+    const [abrirModals, setAbrirModals] = useState(false);
+
     return(
         <>
-            <div class="container-narrow my-5 mx-5 pt-4 px-3 px-lg-4">
+            <div class="container-narrow my-5 mx-3 pt-4 px-3 px-lg-4">
                 <div class="text-center mb-5">
                     <h1>Usuarios</h1>
                 </div>
@@ -22,12 +24,14 @@ const UsersList = () => {
                     {users.map((user, index) => (
                         <div className="col-md-2" key={index}>
                             <Card 
-                                nombre={`${user.name.first} ${user.name.last}`} 
-                                link="" 
-                                imagen={user.picture.large} 
+                                user = {user}
+                                modalAbierto={abrirModals}
                             />
                         </div>
                     ))}
+                </div>
+                <div class= "text-center mb-5">
+                    <button class="btn btn-primary mb-3" data-toggle="modal" onClick={() => setAbrirModals(!abrirModals)}>{abrirModals ? 'Cerrar Detalles' : 'Ver Detalles'}</button>
                 </div>
             </div>
         </>

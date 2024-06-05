@@ -1,29 +1,32 @@
-import {useState} from "react"
-import Modal from "../../views/Modal";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faMapMarkerAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 
-const Card = ({nombre, imagen}) =>{
-    const [showModal, setShowModal] = useState(false);
-    const [selectedUser, setSelectedUser] = useState(null);
-
-    const handleCardClick = (user) => {
-        setSelectedUser(user);
-        setShowModal(true);
-    };
-
-    const handleClose = () => {
-        setShowModal(false);
-        setSelectedUser(null);
-    };
-
+const Card = ({user, modalAbierto}) =>{
+    
     return(
         <>
-            <Modal show={showModal} handleClose={handleClose} user={selectedUser} />
-
-            <div class="card mb-3" style={{ width: '18rem' }}>
-                <img class="card-img-top " src={imagen} alt="user"/>
+            <div class="card mb-3 mx-4" style={{ width: '18rem' }}>
+                <img class="card-img-top " src={user.picture.large} alt="user"/>
                 <div class="card-body">
-                    <h5 class="card-title">{nombre}</h5>
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onClick={() => handleCardClick()}>Mas Info</a>
+                    <h5 class="card-title">{`${user.name.first} ${user.name.last}`}</h5>
+                    {
+                        modalAbierto &&
+                        (
+                            <>
+                                <div className="modal-content">
+                                    <div className="modal-item">
+                                        <FontAwesomeIcon icon={faMapMarkerAlt} /> {`${user.location.city}, ${user.location.country}`}
+                                    </div>
+                                    <div className="modal-item">
+                                        <FontAwesomeIcon icon={faEnvelope} /> {user.email}
+                                    </div>
+                                    <div className="modal-item">
+                                        <FontAwesomeIcon icon={faUser}/> {user.login.username}
+                                    </div>
+                                </div>
+                            </> 
+                        )
+                    }
                 </div>
             </div>
 
